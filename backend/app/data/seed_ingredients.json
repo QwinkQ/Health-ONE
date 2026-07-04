@@ -1,0 +1,18 @@
+[
+  {"name": "鸡胸肉", "aliases": ["鸡肉"], "category": "肉类", "calories_per_100g": 165, "protein_per_100g": 31, "fat_per_100g": 3.6, "carbs_per_100g": 0, "fiber_per_100g": 0, "sodium_mg_per_100g": 74, "allergens": [], "contraindications": []},
+  {"name": "鸡蛋", "aliases": ["蛋"], "category": "蛋奶", "calories_per_100g": 143, "protein_per_100g": 12.6, "fat_per_100g": 9.5, "carbs_per_100g": 0.7, "fiber_per_100g": 0, "sodium_mg_per_100g": 142, "allergens": ["egg"], "contraindications": []},
+  {"name": "番茄", "aliases": ["西红柿"], "category": "蔬菜", "calories_per_100g": 18, "protein_per_100g": 0.9, "fat_per_100g": 0.2, "carbs_per_100g": 3.9, "fiber_per_100g": 1.2, "sodium_mg_per_100g": 5, "allergens": [], "contraindications": []},
+  {"name": "菠菜", "aliases": [], "category": "蔬菜", "calories_per_100g": 23, "protein_per_100g": 2.9, "fat_per_100g": 0.4, "carbs_per_100g": 3.6, "fiber_per_100g": 2.2, "sodium_mg_per_100g": 79, "allergens": [], "contraindications": ["kidney_disease"]},
+  {"name": "豆腐", "aliases": ["北豆腐"], "category": "豆制品", "calories_per_100g": 76, "protein_per_100g": 8, "fat_per_100g": 4.8, "carbs_per_100g": 1.9, "fiber_per_100g": 0.3, "sodium_mg_per_100g": 7, "allergens": ["soy"], "contraindications": []},
+  {"name": "牛肉", "aliases": [], "category": "肉类", "calories_per_100g": 250, "protein_per_100g": 26, "fat_per_100g": 15, "carbs_per_100g": 0, "fiber_per_100g": 0, "sodium_mg_per_100g": 72, "allergens": [], "contraindications": []},
+  {"name": "鲈鱼", "aliases": ["鱼"], "category": "水产", "calories_per_100g": 105, "protein_per_100g": 18.6, "fat_per_100g": 3.4, "carbs_per_100g": 0, "fiber_per_100g": 0, "sodium_mg_per_100g": 68, "allergens": ["fish"], "contraindications": []},
+  {"name": "西兰花", "aliases": [], "category": "蔬菜", "calories_per_100g": 34, "protein_per_100g": 2.8, "fat_per_100g": 0.4, "carbs_per_100g": 6.6, "fiber_per_100g": 2.6, "sodium_mg_per_100g": 33, "allergens": [], "contraindications": []},
+  {"name": "虾仁", "aliases": ["虾"], "category": "水产", "calories_per_100g": 99, "protein_per_100g": 24, "fat_per_100g": 0.3, "carbs_per_100g": 0.2, "fiber_per_100g": 0, "sodium_mg_per_100g": 111, "allergens": ["shellfish"], "contraindications": []},
+  {"name": "香菜", "aliases": ["芫荽"], "category": "香草", "calories_per_100g": 23, "protein_per_100g": 2.1, "fat_per_100g": 0.5, "carbs_per_100g": 3.7, "fiber_per_100g": 2.8, "sodium_mg_per_100g": 46, "allergens": [], "contraindications": []},
+  {"name": "盐", "aliases": ["食盐"], "category": "调味品", "calories_per_100g": 0, "protein_per_100g": 0, "fat_per_100g": 0, "carbs_per_100g": 0, "fiber_per_100g": 0, "sodium_mg_per_100g": 38758, "allergens": [], "contraindications": ["hypertension"]},
+  {"name": "生抽", "aliases": ["酱油"], "category": "调味品", "calories_per_100g": 53, "protein_per_100g": 8, "fat_per_100g": 0, "carbs_per_100g": 4.9, "fiber_per_100g": 0.8, "sodium_mg_per_100g": 5493, "allergens": ["soy"], "contraindications": ["hypertension"]},
+  {"name": "米饭", "aliases": ["白米饭"], "category": "主食", "calories_per_100g": 116, "protein_per_100g": 2.6, "fat_per_100g": 0.3, "carbs_per_100g": 25.9, "fiber_per_100g": 0.3, "sodium_mg_per_100g": 1, "allergens": [], "contraindications": ["diabetes"]},
+  {"name": "藜麦", "aliases": [], "category": "主食", "calories_per_100g": 120, "protein_per_100g": 4.4, "fat_per_100g": 1.9, "carbs_per_100g": 21.3, "fiber_per_100g": 2.8, "sodium_mg_per_100g": 7, "allergens": [], "contraindications": []},
+  {"name": "苹果", "aliases": [], "category": "水果", "calories_per_100g": 52, "protein_per_100g": 0.3, "fat_per_100g": 0.2, "carbs_per_100g": 13.8, "fiber_per_100g": 2.4, "sodium_mg_per_100g": 1, "allergens": [], "contraindications": []}
+]
+

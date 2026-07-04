@@ -1,0 +1,127 @@
+[
+  {
+    "id": "r001",
+    "name": "番茄鸡胸肉豆腐汤",
+    "cuisine": "中式家常",
+    "taste_tags": ["清淡", "鲜"],
+    "difficulty": "简单",
+    "cooking_time_min": 25,
+    "servings": 2,
+    "ingredients": [
+      {"name": "鸡胸肉", "amount_g": 220},
+      {"name": "番茄", "amount_g": 220},
+      {"name": "豆腐", "amount_g": 200},
+      {"name": "盐", "amount_g": 2},
+      {"name": "香菜", "amount_g": 5, "optional": true}
+    ],
+    "steps": ["鸡胸肉切片焯水或用少量淀粉抓匀。", "番茄炒出汁后加水煮开。", "加入豆腐和鸡胸肉煮 8 分钟。", "少量盐调味，忌口香菜可直接不放。"],
+    "goals": ["cutting", "bulking", "maintaining"],
+    "suitable_conditions": ["hypertension"],
+    "avoid_conditions": ["soy_allergy"],
+    "forbidden_ingredients": [],
+    "tips": "高蛋白、低脂，适合训练日晚餐。高血压用户把盐减半。"
+  },
+  {
+    "id": "r002",
+    "name": "菠菜鸡蛋饼",
+    "cuisine": "中式家常",
+    "taste_tags": ["咸香", "软嫩"],
+    "difficulty": "简单",
+    "cooking_time_min": 15,
+    "servings": 1,
+    "ingredients": [
+      {"name": "鸡蛋", "amount_g": 100},
+      {"name": "菠菜", "amount_g": 120},
+      {"name": "盐", "amount_g": 1}
+    ],
+    "steps": ["菠菜焯水切碎。", "鸡蛋打散后加入菠菜。", "平底锅少油小火煎熟。"],
+    "goals": ["cutting", "maintaining"],
+    "suitable_conditions": ["elderly"],
+    "avoid_conditions": ["egg_allergy", "kidney_disease"],
+    "forbidden_ingredients": [],
+    "tips": "口感软，适合老人；肾病用户需谨慎菠菜摄入。"
+  },
+  {
+    "id": "r003",
+    "name": "清蒸鲈鱼",
+    "cuisine": "粤式",
+    "taste_tags": ["清淡", "鲜"],
+    "difficulty": "中等",
+    "cooking_time_min": 20,
+    "servings": 2,
+    "ingredients": [
+      {"name": "鲈鱼", "amount_g": 450},
+      {"name": "生抽", "amount_g": 8},
+      {"name": "盐", "amount_g": 1}
+    ],
+    "steps": ["鲈鱼处理干净后划刀。", "水开后上锅蒸 8 到 10 分钟。", "倒掉蒸出的水，少量生抽调味。"],
+    "goals": ["cutting", "maintaining"],
+    "suitable_conditions": ["hypertension", "elderly"],
+    "avoid_conditions": ["fish_allergy"],
+    "forbidden_ingredients": [],
+    "tips": "优质蛋白，低油。高血压用户减少生抽并避免额外加盐。"
+  },
+  {
+    "id": "r004",
+    "name": "西兰花虾仁",
+    "cuisine": "中式家常",
+    "taste_tags": ["清爽", "鲜"],
+    "difficulty": "简单",
+    "cooking_time_min": 18,
+    "servings": 2,
+    "ingredients": [
+      {"name": "西兰花", "amount_g": 250},
+      {"name": "虾仁", "amount_g": 180},
+      {"name": "盐", "amount_g": 1.5}
+    ],
+    "steps": ["西兰花焯水。", "虾仁炒至变色。", "加入西兰花翻炒，少盐调味。"],
+    "goals": ["cutting", "bulking"],
+    "suitable_conditions": ["hypertension"],
+    "avoid_conditions": ["shellfish_allergy"],
+    "forbidden_ingredients": [],
+    "tips": "高蛋白、低脂，适合减脂期。"
+  },
+  {
+    "id": "r005",
+    "name": "鸡肉藜麦饭",
+    "cuisine": "健身餐",
+    "taste_tags": ["清淡", "饱腹"],
+    "difficulty": "简单",
+    "cooking_time_min": 30,
+    "servings": 1,
+    "ingredients": [
+      {"name": "鸡胸肉", "amount_g": 180},
+      {"name": "藜麦", "amount_g": 160},
+      {"name": "西兰花", "amount_g": 120},
+      {"name": "盐", "amount_g": 1.5}
+    ],
+    "steps": ["藜麦提前煮熟。", "鸡胸肉煎熟切片。", "西兰花焯水后装盘。", "少盐调味。"],
+    "goals": ["bulking", "cutting"],
+    "suitable_conditions": [],
+    "avoid_conditions": [],
+    "forbidden_ingredients": [],
+    "tips": "适合作为训练日晚餐，碳水和蛋白质较均衡。"
+  },
+  {
+    "id": "r006",
+    "name": "番茄牛肉汤",
+    "cuisine": "中式家常",
+    "taste_tags": ["酸甜", "鲜"],
+    "difficulty": "中等",
+    "cooking_time_min": 35,
+    "servings": 2,
+    "ingredients": [
+      {"name": "牛肉", "amount_g": 260},
+      {"name": "番茄", "amount_g": 260},
+      {"name": "盐", "amount_g": 2},
+      {"name": "生抽", "amount_g": 5}
+    ],
+    "steps": ["牛肉切片焯水。", "番茄炒出汁后加水。", "加入牛肉炖煮至软。", "少量盐和生抽调味。"],
+    "goals": ["bulking", "maintaining"],
+    "suitable_conditions": [],
+    "avoid_conditions": ["hypertension"],
+    "forbidden_ingredients": [],
+    "tips": "蛋白质高，但调味需要控制钠。"
+  }
+]
+

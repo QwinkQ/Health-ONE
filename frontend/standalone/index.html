@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health ONE</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-lockup">
+          <p class="eyebrow">Health ONE</p>
+          <h1>健康做菜 Agent</h1>
+        </div>
+        <nav>
+          <a href="#chat">对话</a>
+          <a href="#recipes">推荐</a>
+          <a href="#shopping">购物清单</a>
+        </nav>
+      </aside>
+
+      <section class="workspace">
+        <section id="chat" class="chat-panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Health ONE Preview</p>
+            <h2>你的健康做菜 Agent。<br />清淡、增肌、减脂，都能一起想好。</h2>
+            <p class="hero-summary">输入训练消耗、冰箱食材、忌口和家人慢病约束，系统会检索菜谱、计算营养、改写做法并生成购物清单。</p>
+
+            <form id="chatForm" class="prompt-composer">
+              <textarea id="messageInput" rows="6" placeholder="输入食材、训练、忌口、疾病约束和时间要求"></textarea>
+              <div class="composer-actions">
+                <button id="demoButton" type="button" class="secondary-action">示例</button>
+                <button id="submitButton" type="submit">生成推荐</button>
+              </div>
+            </form>
+            <p id="errorBox" class="error" hidden></p>
+          </div>
+        </section>
+
+        <section id="health-connect" class="panel health-connect-panel">
+          <div>
+            <p class="eyebrow">Google Health Connect</p>
+            <h2>从手机读取每日消耗，再喂给饮食 Agent。</h2>
+            <p class="health-copy">Android 端通过 Health Connect 读取步数、活动消耗、运动记录、睡眠和体重，汇总后同步到 FastAPI。后端不会直接绕过手机权限读取健康数据。</p>
+          </div>
+          <div class="health-flow">
+            <span>Android</span>
+            <span>Health Connect</span>
+            <span>/api/health/connect/sync</span>
+            <span>Meal Agent</span>
+          </div>
+        </section>
+
+        <section id="resultRoot" hidden></section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
