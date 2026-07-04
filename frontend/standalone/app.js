@@ -1,27 +1,36 @@
 const apiBaseUrl = "http://127.0.0.1:8000/api";
-const demoPrompt =
-  "我今天练胸，消耗 650 kcal，想增肌。冰箱里有鸡胸肉、番茄、鸡蛋、菠菜，不吃香菜。我爸高血压，晚饭也一起吃，30 分钟内完成。";
+const userIdKey = "health-one-user-id";
 
 const messageInput = document.querySelector("#messageInput");
 const form = document.querySelector("#chatForm");
 const submitButton = document.querySelector("#submitButton");
-const demoButton = document.querySelector("#demoButton");
 const resultRoot = document.querySelector("#resultRoot");
 const errorBox = document.querySelector("#errorBox");
 
-messageInput.value = demoPrompt;
+function getUserId() {
+  const existing = localStorage.getItem(userIdKey);
+  if (existing) return existing;
+
+  const id = crypto.randomUUID();
+  localStorage.setItem(userIdKey, id);
+  return id;
+}
 
 if (window.location.hash && !document.querySelector(window.location.hash)) {
   history.replaceState(null, "", window.location.pathname);
   window.scrollTo({ top: 0 });
 }
 
-demoButton.addEventListener("click", () => {
-  messageInput.value = demoPrompt;
-});
-
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const message = messageInput.value.trim();
+  if (!message) {
+    errorBox.hidden = false;
+    errorBox.textContent = "请先输入饮食需求、食材或健康约束。";
+    return;
+  }
+
   submitButton.disabled = true;
   submitButton.textContent = "生成中...";
   errorBox.hidden = true;
@@ -33,8 +42,8 @@ form.addEventListener("submit", async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: "demo-user",
-        message: messageInput.value,
+        user_id: getUserId(),
+        message,
       }),
     });
 

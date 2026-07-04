@@ -1,6 +1,7 @@
 package com.healthone.app
 
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -23,7 +23,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -57,10 +56,9 @@ private fun HealthOneApp() {
     val healthConnectManager = remember { HealthConnectManager() }
     val api = remember { HealthOneApi() }
     val scope = rememberCoroutineScope()
+    val userId = rememberDeviceUserId()
     var status by remember { mutableStateOf("准备同步 Health Connect 数据") }
-    var prompt by remember {
-        mutableStateOf("我今天练胸，消耗 650 kcal，想增肌。冰箱里有鸡胸肉、番茄、鸡蛋、菠菜，不吃香菜。我爸高血压，晚饭也一起吃，30 分钟内完成。")
-    }
+    var prompt by remember { mutableStateOf("") }
     var recommendation by remember { mutableStateOf("") }
     var dailyLog by remember { mutableStateOf<HealthDailyLog?>(null) }
 
@@ -69,7 +67,7 @@ private fun HealthOneApp() {
     ) {
         scope.launch {
             status = "权限已返回，正在读取今日健康数据"
-            dailyLog = healthConnectManager.readToday(this@MainActivity)
+            dailyLog = healthConnectManager.readToday(this@MainActivity, userId)
             dailyLog?.let { log ->
                 status = api.syncHealth(log)
             }
@@ -124,7 +122,7 @@ private fun HealthOneApp() {
                                     val granted = healthConnectManager.hasAllPermissions(this@MainActivity)
                                     if (granted) {
                                         status = "正在读取今日健康数据"
-                                        dailyLog = healthConnectManager.readToday(this@MainActivity)
+                                        dailyLog = healthConnectManager.readToday(this@MainActivity, userId)
                                         dailyLog?.let { status = api.syncHealth(it) }
                                     } else {
                                         permissionLauncher.launch(HealthConnectManager.permissions)
@@ -132,15 +130,6 @@ private fun HealthOneApp() {
                                 }
                             }) {
                                 Text("同步今日消耗")
-                            }
-                            OutlinedButton(onClick = {
-                                scope.launch {
-                                    val demo = HealthDailyLog.demo()
-                                    dailyLog = demo
-                                    status = api.syncHealth(demo)
-                                }
-                            }) {
-                                Text("模拟数据")
                             }
                         }
 
@@ -151,22 +140,31 @@ private fun HealthOneApp() {
                     }
 
                     GlassCard {
-                        Text("今天想怎么吃", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                        Text("今天想怎么吃？", fontWeight = FontWeight.Bold, fontSize = 20.sp)
                         Spacer(Modifier.height(10.dp))
                         OutlinedTextField(
                             value = prompt,
                             onValueChange = { prompt = it },
                             minLines = 5,
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(18.dp)
+                            shape = RoundedCornerShape(18.dp),
+                            placeholder = { Text("输入食材、训练、忌口、疾病约束和做饭时间") }
                         )
                         Spacer(Modifier.height(12.dp))
-                        Button(onClick = {
-                            scope.launch {
-                                recommendation = "生成中..."
-                                recommendation = api.chat(prompt)
+                        Button(
+                            onClick = {
+                                scope.launch {
+                                    recommendation = if (prompt.isBlank()) {
+                                        "请先输入饮食需求、食材或健康约束。"
+                                    } else {
+                                        "生成中..."
+                                    }
+                                    if (prompt.isNotBlank()) {
+                                        recommendation = api.chat(userId, prompt)
+                                    }
+                                }
                             }
-                        }) {
+                        ) {
                             Text("生成推荐")
                         }
                     }
@@ -181,6 +179,16 @@ private fun HealthOneApp() {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun rememberDeviceUserId(): String {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    return remember {
+        Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+            ?.takeIf { it.isNotBlank() }
+            ?: java.util.UUID.randomUUID().toString()
     }
 }
 

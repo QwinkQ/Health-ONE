@@ -11,11 +11,7 @@ _daily_logs: dict[str, dict[str, HealthDailyLog]] = {}
 
 @router.post("/connect/sync", response_model=HealthSummaryResponse)
 def sync_health_connect_daily_log(request: HealthConnectDailySyncRequest) -> HealthSummaryResponse:
-    """Receive a daily aggregate produced by an Android Health Connect client.
-
-    Health Connect permissions and raw record reads happen on-device. The backend
-    stores only the user's consented daily aggregate and optional audit samples.
-    """
+    """Receive a daily aggregate produced by an Android Health Connect client."""
 
     log = HealthDailyLog(
         user_id=request.user_id,
@@ -29,7 +25,6 @@ def sync_health_connect_daily_log(request: HealthConnectDailySyncRequest) -> Hea
         body_weight_kg=request.body_weight_kg,
         sleep_minutes=request.sleep_minutes,
         synced_at=datetime.now(timezone.utc).isoformat(),
-        raw_samples=request.raw_samples,
     )
     _daily_logs.setdefault(request.user_id, {})[request.date] = log
     return _build_summary(log)

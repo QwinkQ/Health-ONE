@@ -60,7 +60,7 @@ class RecipeCandidate(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    user_id: str = "demo-user"
+    user_id: str
     message: str
 
 
@@ -95,15 +95,6 @@ class ShoppingListRequest(BaseModel):
     inventory: list[InventoryItem] = []
 
 
-class HealthConnectSample(BaseModel):
-    record_type: str
-    start_time: str
-    end_time: str | None = None
-    value: float
-    unit: str
-    source_package: str | None = None
-
-
 class HealthDailyLog(BaseModel):
     user_id: str
     date: str
@@ -116,7 +107,6 @@ class HealthDailyLog(BaseModel):
     body_weight_kg: float | None = Field(default=None, ge=0)
     sleep_minutes: int | None = Field(default=None, ge=0)
     synced_at: str | None = None
-    raw_samples: list[HealthConnectSample] = []
 
 
 class HealthConnectDailySyncRequest(BaseModel):
@@ -130,7 +120,6 @@ class HealthConnectDailySyncRequest(BaseModel):
     workout_duration_min: int = Field(default=0, ge=0)
     body_weight_kg: float | None = Field(default=None, ge=0)
     sleep_minutes: int | None = Field(default=None, ge=0)
-    raw_samples: list[HealthConnectSample] = []
 
 
 class HealthSummaryResponse(BaseModel):

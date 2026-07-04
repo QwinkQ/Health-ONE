@@ -2,7 +2,6 @@ package com.healthone.app
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -17,9 +16,9 @@ class HealthOneApi(
         json.optString("message", "健康数据已同步")
     }
 
-    suspend fun chat(message: String): String = withContext(Dispatchers.IO) {
+    suspend fun chat(userId: String, message: String): String = withContext(Dispatchers.IO) {
         val payload = JSONObject()
-            .put("user_id", "demo-user")
+            .put("user_id", userId)
             .put("message", message)
         val response = postJson("/chat", payload)
         JSONObject(response).optString("answer", response)
@@ -72,23 +71,5 @@ data class HealthDailyLog(
             .put("workout_duration_min", workoutDurationMin)
             .put("body_weight_kg", bodyWeightKg)
             .put("sleep_minutes", sleepMinutes)
-            .put("raw_samples", JSONArray())
-    }
-
-    companion object {
-        fun demo(): HealthDailyLog {
-            return HealthDailyLog(
-                userId = "demo-user",
-                date = java.time.LocalDate.now().toString(),
-                steps = 9620,
-                activeEnergyKcal = 820.0,
-                workoutEnergyKcal = 650.0,
-                workoutType = "strength_training",
-                workoutDurationMin = 72,
-                bodyWeightKg = 75.2,
-                sleepMinutes = 435,
-            )
-        }
     }
 }
-

@@ -19,7 +19,7 @@ class AgentService:
         self.ingredients = get_ingredients()
 
     def handle_chat(self, user_id: str, message: str) -> ChatResponse:
-        context = self._parse_message(message)
+        context = self._parse_message(user_id, message)
         search_request = RecipeSearchRequest(
             query=message,
             ingredients=context["ingredients"],
@@ -38,7 +38,7 @@ class AgentService:
         shopping_list = self.inventory.missing_for_recipes(selected_recipes, inventory_items)
         nutrition_summary = self.nutrition.sum_nutrition([candidate.nutrition for candidate in candidates])
         warnings = self._collect_warnings(context, candidates)
-        answer = self._build_answer(context, candidates, shopping_list, nutrition_summary, warnings)
+        answer = self._build_answer(candidates, shopping_list, nutrition_summary, warnings)
 
         return ChatResponse(
             answer=answer,
@@ -49,7 +49,7 @@ class AgentService:
             parsed_context=context,
         )
 
-    def _parse_message(self, message: str) -> dict:
+    def _parse_message(self, user_id: str, message: str) -> dict:
         known_names = {item["name"] for item in self.ingredients.values()}
         ingredients = sorted(name for name in known_names if name in message)
 
@@ -88,7 +88,7 @@ class AgentService:
         workout_energy_kcal = int(energy_match.group(1)) if energy_match else None
 
         return {
-            "user_id": "demo-user",
+            "user_id": user_id,
             "ingredients": [item for item in ingredients if item not in avoid_ingredients],
             "avoid_ingredients": sorted(set(avoid_ingredients)),
             "conditions": sorted(set(conditions)),
@@ -110,7 +110,6 @@ class AgentService:
 
     def _build_answer(
         self,
-        context: dict,
         candidates,
         shopping_list: list[IngredientAmount],
         nutrition: NutritionFacts,
@@ -120,7 +119,7 @@ class AgentService:
             return "没有找到完全匹配的菜谱。可以放宽做饭时间、减少限制，或补充更多可用食材。"
 
         lines: list[str] = []
-        lines.append("根据你的食材、训练目标和健康约束，我推荐下面这些菜：")
+        lines.append("根据你的食材、训练目标和健康约束，推荐下面这些菜：")
         for index, candidate in enumerate(candidates, start=1):
             recipe = candidate.recipe
             matched = "、".join(candidate.matched_ingredients) or "暂无"
@@ -145,4 +144,3 @@ class AgentService:
             lines.append("注意：" + "；".join(warnings[:4]))
 
         return "\n".join(lines)
-

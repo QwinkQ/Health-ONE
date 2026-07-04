@@ -2,9 +2,6 @@ import { FormEvent, useMemo, useState } from "react";
 import { sendChat } from "./api/client";
 import type { ChatResponse, RecipeCandidate } from "./types";
 
-const demoPrompt =
-  "我今天练胸，消耗 650 kcal，想增肌。冰箱里有鸡胸肉、番茄、鸡蛋、菠菜，不吃香菜。我爸高血压，晚饭也一起吃，30 分钟内完成。";
-
 function NutritionLine({ item }: { item: ChatResponse["nutrition_summary"] }) {
   return (
     <div className="metrics">
@@ -19,6 +16,7 @@ function NutritionLine({ item }: { item: ChatResponse["nutrition_summary"] }) {
 
 function RecipeItem({ candidate }: { candidate: RecipeCandidate }) {
   const recipe = candidate.recipe;
+
   return (
     <article className="recipe-item">
       <header className="recipe-header">
@@ -48,7 +46,7 @@ function RecipeItem({ candidate }: { candidate: RecipeCandidate }) {
 }
 
 export default function App() {
-  const [message, setMessage] = useState(demoPrompt);
+  const [message, setMessage] = useState("");
   const [result, setResult] = useState<ChatResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -57,12 +55,17 @@ export default function App() {
     if (!result) return [];
     return Object.entries(result.parsed_context).map(([key, value]) => ({
       key,
-      value: Array.isArray(value) ? value.join("、") : String(value ?? "未识别")
+      value: Array.isArray(value) ? value.join("、") : String(value ?? "未识别"),
     }));
   }, [result]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    if (!message.trim()) {
+      setError("请先输入饮食需求、食材或健康约束。");
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {
@@ -95,9 +98,8 @@ export default function App() {
           <div className="panel-heading">
             <div>
               <p className="eyebrow">Agent 输入</p>
-              <h2>今天想怎么吃</h2>
+              <h2>今天想怎么吃？</h2>
             </div>
-            <button type="button" onClick={() => setMessage(demoPrompt)}>示例</button>
           </div>
 
           <form onSubmit={handleSubmit}>
@@ -105,7 +107,7 @@ export default function App() {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               rows={6}
-              placeholder="输入食材、训练、忌口、疾病约束和时间要求"
+              placeholder="输入食材、训练、忌口、疾病约束和做饭时间"
             />
             <button type="submit" disabled={loading}>{loading ? "生成中..." : "生成推荐"}</button>
           </form>
@@ -172,4 +174,3 @@ export default function App() {
     </main>
   );
 }
-

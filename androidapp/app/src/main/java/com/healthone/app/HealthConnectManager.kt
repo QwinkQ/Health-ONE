@@ -2,7 +2,6 @@ package com.healthone.app
 
 import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
-import androidx.health.connect.client.PermissionController
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.ActiveCaloriesBurnedRecord
 import androidx.health.connect.client.records.ExerciseSessionRecord
@@ -31,7 +30,7 @@ class HealthConnectManager {
         }
     }
 
-    suspend fun readToday(context: Context): HealthDailyLog {
+    suspend fun readToday(context: Context, userId: String): HealthDailyLog {
         val client = HealthConnectClient.getOrCreate(context)
         val zone = ZoneId.systemDefault()
         val start = LocalDate.now(zone).atStartOfDay(zone).toInstant()
@@ -82,7 +81,7 @@ class HealthConnectManager {
         val weightKg = weights.maxByOrNull { it.time }?.weight?.inKilograms
 
         return HealthDailyLog(
-            userId = "demo-user",
+            userId = userId,
             date = LocalDate.now(zone).toString(),
             steps = steps,
             activeEnergyKcal = activeKcal.round1(),
@@ -107,4 +106,3 @@ class HealthConnectManager {
         )
     }
 }
-
