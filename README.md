@@ -69,9 +69,8 @@ npm run dev
 
 使用 Android Studio 打开 `androidapp/` 目录。
 
-Android 第一版包含：
+Android包含：
 
-- Jetpack Compose UI
 - Health Connect 权限申请
 - 当日步数、活动消耗、训练、睡眠、体重读取
 - `POST /api/health/connect/sync` 同步到 FastAPI
