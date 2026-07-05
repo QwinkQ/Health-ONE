@@ -30,8 +30,8 @@ Health ONE 的核心价值是把“今天实际消耗了多少、家里有什么
 
 ```text
 backend/      FastAPI 后端、Agent tools、RAG 检索、健康数据接口
-frontend/     React + Vite 前端，以及无依赖 standalone 前端
-androidapp/   Kotlin + Jetpack Compose + Health Connect Android App
+frontend/     React前端
+androidapp/   Kotlin 、 Jetpack Compose 、Health Connect Android App
 pic/          README 展示图片
 ```
 
